@@ -21,7 +21,9 @@ RUN ln -nfs /stellard-src/vagrant/stellar-private-ledger /usr/local/bin/stellar-
 RUN chmod a+x /stellard-src/vagrant/stellar-private-ledger
 RUN ln -nfs /stellard-src/vagrant/stellar-public-ledger /usr/local/bin/stellar-public-ledger
 RUN chmod a+x /stellard-src/vagrant/stellar-public-ledger
+RUN touch /var/log/stellard.log
+RUN chmod a+w /var/log/stellard.log
 
 VOLUME "/var/lib/stellard"
 EXPOSE 9101 9102 52101
-CMD /usr/local/bin/stellar-public-ledger
+CMD nohup /usr/local/bin/stellar-public-ledger &> /var/log/stellard.log &
